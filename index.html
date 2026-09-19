@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07090d">
+<meta name="description" content="Playrush — a premium sports game center, schedules, live scores and play-by-play.">
+<title>Playrush — Sports Social</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#home" aria-label="Playrush home"><span class="brand-mark">P</span><span>PLAYRUSH</span></a>
+  <nav class="desktop-nav" aria-label="Primary">
+    <a href="#home">Home</a><a href="#sports">Game Center</a><a href="#feed">Community</a><a href="#store">Store</a><a href="#profile">Profile</a><a href="#help">Help</a>
+  </nav>
+  <button class="mobile-menu" id="mobileMenu" type="button" aria-expanded="false">☰</button>
+  <div class="topbar-actions"><button class="coin-pill" id="coinPill" type="button">◈ <span id="coinBalance">1,000</span></button><button class="auth-pill" id="authButton" type="button">Sign in</button></div>
+</header>
+<div class="mobile-nav" id="mobileNav" hidden><a href="#home">Home</a><a href="#sports">Game Center</a><a href="#feed">Community</a><a href="#store">Store</a><a href="#profile">Profile</a><a href="#help">Help</a></div>
+
+
+<div class="auth-modal" id="authModal" hidden aria-hidden="true"><div class="auth-backdrop" data-auth-close></div><section class="auth-sheet" role="dialog" aria-modal="true" aria-labelledby="authTitle"><button class="icon-btn auth-close" type="button" data-auth-close aria-label="Close">×</button><div class="auth-brand"><span class="brand-mark">P</span><span>PLAYRUSH</span></div><span class="eyebrow">YOUR SPORTS IDENTITY</span><h2 id="authTitle">Welcome back.</h2><p class="muted" id="authSubtitle">Sign in to save your profile, wagers, purchases and community activity.</p><div class="oauth-buttons"><a class="oauth-btn google" id="googleAuth" href="/api/auth/google"><span>G</span>Continue with Google</a><a class="oauth-btn apple" id="appleAuth" href="/api/auth/apple"><span>●</span>Continue with Apple</a></div><div class="auth-divider"><span>or</span></div><div class="auth-tabs"><button type="button" class="auth-tab active" data-auth-mode="login">Sign in</button><button type="button" class="auth-tab" data-auth-mode="register">Create account</button></div><form id="authForm" class="auth-form"><label class="name-field" hidden>Name<input id="authName" maxlength="60" autocomplete="name"></label><label>Email<input id="authEmail" type="email" autocomplete="email" required></label><label>Password<input id="authPassword" type="password" minlength="8" maxlength="128" autocomplete="current-password" required><small>At least 8 characters.</small></label><button class="btn btn-primary" id="authSubmit" type="submit">Sign in</button><div class="auth-error" id="authError" aria-live="polite"></div></form><p class="auth-legal">By using Playrush, you agree to follow the site's Terms and Privacy Policy.</p></section></div>
+
+<main>
+<section id="home" class="page">
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow">THE SPORTS OPERATING SYSTEM</span>
+      <h1>Every game.<br><em>Every moment.</em></h1>
+      <p>Follow live games, browse complete schedules, jump through the archive, talk with other fans, and own your Playrush profile.</p>
+      <div class="hero-actions"><a class="btn btn-primary" href="#sports">Open Game Center</a><a class="btn btn-ghost" href="#sports">Explore the current season</a></div>
+      <div class="trust-row"><span>● Historical data</span><span>● Live-ready</span><span>● No fabricated scores</span></div>
+    </div>
+    <div class="hero-panel">
+      <div class="hero-panel-top"><span>PLAYRUSH GAME CENTER</span><b>2026 CYCLE</b></div>
+      <div class="mini-score"><div><small>Live scores</small><strong>LIVE</strong></div><div class="dash">·</div><div class="right"><small>Every league</small><strong>4</strong></div></div>
+      <div class="hero-panel-foot"><span>Open a real game for its main feed, play-by-play, score and box score.</span><a href="#sports">Browse →</a></div>
+    </div>
+  </div>
+  <div class="section-title"><div><span class="eyebrow">PLATFORM</span><h2>Built around the game</h2></div></div>
+  <div class="feature-grid">
+    <article><span class="feature-icon">◫</span><h3>Season Explorer</h3><p>Season → date → game. Move through full schedules instead of a handful of demo cards.</p></article>
+    <article><span class="feature-icon">◉</span><h3>Game Center</h3><p>Scoreboard, team context, box score and game metadata in one focused workspace.</p></article>
+    <article><span class="feature-icon">↯</span><h3>All Plays</h3><p>Jump from quarter to quarter and inspect the event stream with clock, score and descriptions.</p></article>
+    <article><span class="feature-icon">◈</span><h3>Playrush Store</h3><p>Buy Rush Coins and digital profile drops through secure in-site checkout.</p></article>
+  </div>
+</section>
+
+<section id="sports" class="page" hidden>
+  <div class="sports-header">
+    <div><span class="eyebrow">GAME CENTER</span><h2>Sports schedules</h2><p class="muted">Current schedules first. Historical seasons stay searchable, with the same Game Center experience.</p></div>
+    <div class="api-badge" id="apiStatus">Checking data…</div>
+  </div>
+  <div class="sports-toolbar">
+    <div class="sport-tabs" role="tablist" aria-label="Sports"><button class="sport-tab active" data-sport="nba" type="button">NBA</button><button class="sport-tab" data-sport="nfl" type="button">NFL</button><button class="sport-tab" data-sport="mlb" type="button">MLB</button><button class="sport-tab" data-sport="nhl" type="button">NHL</button></div>
+    <div class="filters"><label>Season<select id="seasonSelect"><option value="2026-27">2026–27</option><option value="2025-26">2025–26</option><option value="2024-25">2024–25</option><option value="2023-24">2023–24</option><option value="2022-23">2022–23</option><option value="2021–22">2021–22</option><option value="2020-21">2020–21</option><option value="2019-20">2019–20</option><option value="2018-19">2018–19</option><option value="2017-18">2017–18</option><option value="2016-17">2016–17</option></select></label><label>Stage<select id="stageSelect"><option value="Regular Season">Regular Season</option><option value="Playoffs">Playoffs</option><option value="Pre Season">Preseason</option></select></label><label>Date<input id="dateFilter" type="date"></label><button id="clearDate" class="btn btn-small" type="button">Clear</button></div>
+  </div>
+  <div class="schedule-meta"><div><span id="scheduleCount">Loading schedule…</span><small id="scheduleUpdated">Live data</small></div><div class="schedule-actions"><button id="prevDay" class="icon-btn" type="button" aria-label="Previous day">‹</button><button id="todayBtn" class="btn btn-small" type="button">Today</button><button id="nextDay" class="icon-btn" type="button" aria-label="Next day">›</button></div></div>
+  <div id="schedule" class="schedule"></div>
+</section>
+
+<section id="game" class="page" hidden>
+  <div class="game-top"><a href="#sports" class="back-link">← Schedule</a><span id="gameStage" class="eyebrow">GAME CENTER</span><span id="gameDate" class="muted"></span></div>
+  <div class="score-card">
+    <div class="team-block"><span id="awayCity" class="muted">Away</span><strong id="awayName">—</strong><b id="awayScore">—</b></div>
+    <div class="game-middle"><span id="gameStatus" class="live-dot">FINAL</span><strong id="gameClock">—</strong><span id="gameArena" class="muted">Game data</span></div>
+    <div class="team-block right"><span id="homeCity" class="muted">Home</span><strong id="homeName">—</strong><b id="homeScore">—</b></div>
+  </div>
+  <div class="game-shell">
+    <aside class="game-sidebar"><button class="game-side active" data-game-view="overview" type="button">Overview</button><button class="game-side" data-game-view="plays" type="button">Play-by-Play <span id="playCount">0</span></button><button class="game-side" data-game-view="box" type="button">Box Score</button><button class="game-side" data-game-view="chat" type="button">Live Chat</button></aside>
+    <div class="game-content"><div id="overviewView"></div><div id="playsView" hidden></div><div id="boxView" hidden></div><div id="chatView" hidden></div></div>
+  </div>
+</section>
+
+
+<section id="feed" class="page" hidden><div class="section-title"><div><span class="eyebrow">PLAYRUSH COMMUNITY</span><h2>Main Feed</h2><p class="muted">Post reactions, talk games, and build your sports identity around the Game Center.</p></div></div><form id="postForm" class="composer"><input id="postInput" maxlength="280" placeholder="What are you watching?" required><button class="btn btn-primary" type="submit">Post</button></form><div id="posts"></div></section>
+<section id="store" class="page" hidden>
+  <div class="store-header"><div><span class="eyebrow">PLAYRUSH STORE</span><h2>Own your Playrush</h2><p class="muted">Rush Coins power Playrush features and virtual wagers. Purchases are processed securely by Stripe; Rush Coins have no cash value and cannot be withdrawn.</p></div><div><div class="store-status" id="storeStatus">Checking payments…</div><div class="store-wallet">◈ <b id="storeWallet">0</b> Rush Coins</div></div></div>
+  <div class="store-notice" id="storeNotice">Your purchases are tied to this Playrush profile.</div>
+  <div id="storeGrid" class="store-grid"></div>
+</section>
+
+<section id="help" class="page" hidden>
+  <div class="section-title"><div><span class="eyebrow">PLAYRUSH SUPPORT</span><h2>Help Center</h2><p class="muted">Everything you need to use Game Center, Rush Coins, wagering, the community and the Store.</p></div><button class="btn btn-ghost" id="checkStatus" type="button">Check system status</button></div>
+  <div class="help-grid">
+    <article class="info-card"><span class="eyebrow">GAME CENTER</span><h3>Finding games</h3><p>Open Game Center, choose a league, season and stage, then use the date controls to move through the schedule. Current seasons are shown first; historical seasons remain available.</p><a class="btn btn-primary" href="#sports">Open Game Center</a></article>
+    <article class="info-card"><span class="eyebrow">LIVE GAMES</span><h3>Live feed & play-by-play</h3><p>Live games refresh automatically when fresh provider data is available. Completed games remain available with their final score and historical event data.</p><a class="btn btn-ghost" href="#sports">Find a game</a></article>
+    <article class="info-card"><span class="eyebrow">RUSH COINS</span><h3>Virtual wagering</h3><p>Rush Coins are Playrush virtual currency. They have no cash value and cannot be withdrawn. Eligible future and live games can accept Coin wagers until the game is final.</p><a class="btn btn-ghost" href="#profile">View my wagers</a></article>
+    <article class="info-card"><span class="eyebrow">STORE</span><h3>Purchases & unlocks</h3><p>Real-money Store purchases use Stripe when payments are configured. Coin-redemption items use your Rush Coin balance. Completed purchases are attached to your Playrush profile.</p><a class="btn btn-primary" href="#store">Open Store</a></article>
+  </div>
+  <div class="faq-list">
+    <details open><summary>Why does a schedule say data is unavailable?</summary><p>Playrush does not invent games, scores or plays. If a sports provider is unavailable or does not supply a requested historical feed, the site shows an honest unavailable state instead.</p></details>
+    <details><summary>When does a wager settle?</summary><p>Wagers stay open until the Game Center receives an official final result. A winning wager credits its displayed payout; a losing wager settles without a payout. A game that is already final cannot accept a new wager.</p></details>
+    <details><summary>Can I wager on a future game?</summary><p>Yes, when that game is available to the connected sports provider and its wagering window is open. Future games use the pregame multiplier shown in the Game Center.</p></details>
+    <details><summary>Can I cash out Rush Coins?</summary><p>No. Rush Coins are virtual Playrush currency and are not redeemable for cash.</p></details>
+    <details><summary>What happens if my Store payment succeeds?</summary><p>Stripe sends Playrush a verified payment event. The server fulfills the order and credits the purchased Coins or entitlement. If the browser closes during checkout, the verified payment record can still be fulfilled.</p></details>
+  </div>
+  <div class="support-card">
+    <div><span class="eyebrow">CONTACT SUPPORT</span><h3>Still need help?</h3><p class="muted">Send a support request from inside Playrush. Include the game, order, or feature you are having trouble with. Tickets are routed to <a href="mailto:boxfights806@gmail.com">boxfights806@gmail.com</a>.</p></div>
+    <form id="supportForm" class="support-form"><input id="supportSubject" maxlength="120" placeholder="Subject" required><textarea id="supportMessage" maxlength="2000" placeholder="Describe the issue…" required></textarea><button class="btn btn-primary" type="submit">Send support request</button></form>
+  </div>
+  <div class="support-status" id="supportStatus" aria-live="polite"></div>
+</section>
+
+<section id="profile" class="page" hidden>
+  <div class="profile-card"><div class="avatar">P</div><div><span class="eyebrow">PROFILE</span><h2 id="profileHandle">@fan</h2><p class="muted">Your sports identity, wallet and digital unlocks.</p></div></div>
+  <div class="profile-stats"><div><b id="xp">0</b><span>XP</span></div><div><b id="profileCoins">0</b><span>Rush Coins</span></div><div><b id="profileFollowers">Public</b><span>Profile</span></div></div>
+  <form id="profileForm" class="profile-form"><label>Handle<input id="handleInput" maxlength="24" placeholder="your_handle"></label><label>Email<input id="profileEmail" type="email" maxlength="200" placeholder="you@example.com"></label><button class="btn btn-primary" type="submit">Save profile</button></form>
+  <div class="profile-card premium-panel"><div><span class="eyebrow">RUSHRUSH WALLET</span><h3>My Wagers</h3><p class="muted">Virtual Rush Coin wagers only. Wins are settled automatically from official game results.</p><div id="wagerHistory"></div></div><div class="profile-actions"><span class="wallet-badge">◈ <b id="profileWagerCoins">0</b></span><a class="btn btn-primary" href="#sports">Find a game</a><button class="btn btn-ghost" id="billingPortal" type="button">Billing & receipts</button></div></div>
+  <div class="profile-card premium-panel"><div><span class="eyebrow">UNLOCKS</span><h3>Owned items</h3><div id="entitlementList"></div></div></div>
+</section>
+<div class="checkout-modal" id="checkoutModal" hidden><div class="checkout-backdrop"></div><div class="checkout-sheet"><div class="checkout-head"><div><span class="eyebrow">SECURE CHECKOUT</span><h3>Complete your purchase</h3></div><button class="icon-btn" id="closeCheckout" type="button" aria-label="Close checkout">×</button></div><div id="checkoutMount"></div></div></div>
+</main>
+<div id="toast" class="toast" aria-live="polite"></div>
+<footer><span>PLAYRUSH · Historical + live-ready sports data · No fabricated game data</span><a href="#help">Help Center</a><a href="#sports">Game Center</a><a href="#store">Store</a></footer>
+<script src="https://js.stripe.com/clover/stripe.js"></script><script src="config.js"></script><script src="app.js"></script>
+</body></html>

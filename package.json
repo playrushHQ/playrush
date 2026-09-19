@@ -1,0 +1,23 @@
+{
+  "name": "playrush",
+  "version": "4.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Playrush \u2014 a public sports social network with live Game Center, community, profile commerce and Rush Coins.",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "check": "node --check server.js && node --check app.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "pg": "^8.16.3",
+    "stripe": "^22.6.0",
+    "bcryptjs": "^3.0.2",
+    "jose": "^6.1.0"
+  }
+}

@@ -1,0 +1,47 @@
+services:
+  - type: web
+    name: playrush
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: playrush-db
+          property: connectionString
+      - key: PUBLIC_URL
+        sync: false
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_PUBLISHABLE_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: APPLE_CLIENT_ID
+        sync: false
+      - key: APPLE_TEAM_ID
+        sync: false
+      - key: APPLE_KEY_ID
+        sync: false
+      - key: APPLE_PRIVATE_KEY
+        sync: false
+      - key: SUPPORT_EMAIL
+        value: "boxfights806@gmail.com"
+      - key: RESEND_API_KEY
+        sync: false
+      - key: SUPPORT_FROM_EMAIL
+        sync: false
+
+databases:
+  - name: playrush-db
+    databaseName: playrush
+    user: playrush
+    plan: free
