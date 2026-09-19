@@ -1,1 +1,0 @@
-window.PLAYRUSH_CONFIG = { BACKEND_BASE: "", SPORTS_API_BASE: "/api", CHAT_WS_URL: "" };
