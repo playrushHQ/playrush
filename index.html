@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Playrush — sports, gaming and social.">
+  <title>Playrush</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#home" data-route="home" aria-label="Playrush home"><span class="brand-mark"></span>Playrush</a>
+  <nav aria-label="Primary navigation">
+    <button class="nav-btn active" data-route="home">Home</button>
+    <button class="nav-btn" data-route="sports">Sports</button>
+    <button class="nav-btn" data-route="feed">Feed</button>
+    <button class="nav-btn" data-route="predictions">Predictions</button>
+    <button class="nav-btn" data-route="profile">Profile</button>
+  </nav>
+  <button class="coin-pill" data-route="coins" aria-label="Open coins">◈ <span id="coinBalance">1,250</span></button>
+</header>
+
+<main>
+  <section id="home" class="page">
+    <div class="hero">
+      <div>
+        <span class="eyebrow">SPORTS · GAMING · SOCIAL</span>
+        <h1>Everything you play.<br>One place.</h1>
+        <p>Playrush combines sports, gaming, predictions and community in one simple mobile-first experience.</p>
+        <div class="actions">
+          <button class="primary" data-route="sports">Explore Sports</button>
+          <button class="secondary" data-route="feed">Open Main Feed</button>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div><b>LIVE</b><span>Game Center</span></div>
+        <div><b>XP</b><span>Prediction progress</span></div>
+        <div><b>◈</b><span>In-app coins</span></div>
+        <div><b>ALL</b><span>Play-by-play</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><h2>Everything from your spec</h2><span class="muted">Simple first. Backend-ready.</span></div>
+      <div class="feature-grid">
+        <article class="card"><span class="big-icon">🏠</span><h3>Social</h3><p>Main feed, posts, likes, replies, follows, sharing, profiles, notifications, search, trending and communities.</p></article>
+        <article class="card"><span class="big-icon">🏀</span><h3>Sports Hub</h3><p>Sports → League → Season → Date → Games → Game Center, including upcoming, live, final and historical games.</p></article>
+        <article class="card"><span class="big-icon">🎮</span><h3>Game Center</h3><p>Every game has exactly two primary views: <b>Main Feed</b> and <b>Play-by-Play (All)</b>, plus live game chat.</p></article>
+        <article class="card"><span class="big-icon">🔮</span><h3>Predictions</h3><p>XP-based predictions, community percentages, accuracy, streaks, leaderboards and underdog indicators.</p></article>
+        <article class="card"><span class="big-icon">◈</span><h3>Coins</h3><p>Earn/spend an in-app progression currency on cosmetics, badges, reactions, username styles and boosts.</p></article>
+        <article class="card"><span class="big-icon">👤</span><h3>Profiles</h3><p>PFP, username, bio, followers/following, activity, likes, badges, XP/rank, coins and communities.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="sports" class="page" hidden>
+    <div class="section-head">
+      <div><span class="eyebrow">SPORTS HUB</span><h2>Pick a league</h2><p class="muted">Real scores and events come from the configured sports API. This starter never invents live data.</p></div>
+      <span class="status">API READY</span>
+    </div>
+    <div class="league-grid">
+      <button class="league card interactive" data-league="NBA"><span class="big-icon">🏀</span><b>NBA</b><span>Basketball</span></button>
+      <button class="league card interactive" data-league="NFL"><span class="big-icon">🏈</span><b>NFL</b><span>Football</span></button>
+      <button class="league card interactive" data-league="MLB"><span class="big-icon">⚾</span><b>MLB</b><span>Baseball</span></button>
+      <button class="league card interactive" data-league="NHL"><span class="big-icon">🏒</span><b>NHL</b><span>Hockey</span></button>
+    </div>
+    <div id="schedulePanel" class="card game-list" hidden></div>
+  </section>
+
+  <section id="game" class="page" hidden>
+    <div class="game-header">
+      <button class="back secondary" data-route="sports">← Sports</button>
+      <span id="gameStatus" class="status">GAME</span>
+      <span id="gameClock" class="muted"></span>
+    </div>
+    <div class="scoreboard card">
+      <div><span id="awayTeam">Away</span><strong id="awayScore">—</strong></div>
+      <div class="at">@</div>
+      <div><span id="homeTeam">Home</span><strong id="homeScore">—</strong></div>
+    </div>
+    <div class="game-tabs" role="tablist">
+      <button class="game-tab active" data-game-tab="main">Main Feed</button>
+      <button class="game-tab" data-game-tab="plays">Play-by-Play (All)</button>
+      <button class="game-tab" data-game-tab="chat">Live Chat</button>
+    </div>
+    <div id="mainView" class="game-view"></div>
+    <div id="playsView" class="game-view" hidden></div>
+    <div id="chatView" class="game-view" hidden></div>
+  </section>
+
+  <section id="feed" class="page" hidden>
+    <div class="section-head"><div><span class="eyebrow">SOCIAL</span><h2>Main Feed</h2></div></div>
+    <form id="postForm" class="composer card">
+      <input id="postInput" maxlength="280" placeholder="What are you playing?" aria-label="Create a post" required>
+      <button class="primary" type="submit">Post</button>
+    </form>
+    <div id="posts"></div>
+  </section>
+
+  <section id="predictions" class="page" hidden>
+    <div class="section-head"><div><span class="eyebrow">PREDICTIONS</span><h2>Pick the game</h2><p class="muted">Predictions use XP. Valuable coins are never wagered on real-world sports.</p></div></div>
+    <div id="predictionCards" class="prediction-grid"></div>
+  </section>
+
+  <section id="coins" class="page" hidden>
+    <div class="section-head"><div><span class="eyebrow">COINS</span><h2>Your coin system</h2><p class="muted">Coins are an in-app progression/cosmetic currency, not a real-world betting balance.</p></div></div>
+    <div class="coin-hero card"><span>Current balance</span><strong>◈ <span id="coinBalanceLarge">1,250</span></strong></div>
+    <div class="shop-grid">
+      <button class="shop card interactive" data-cost="150" data-item="Username Style"><b>Username Style</b><span>150 ◈</span></button>
+      <button class="shop card interactive" data-cost="300" data-item="Reaction Pack"><b>Reaction Pack</b><span>300 ◈</span></button>
+      <button class="shop card interactive" data-cost="500" data-item="Profile Badge"><b>Profile Badge</b><span>500 ◈</span></button>
+      <button class="shop card interactive" data-cost="750" data-item="Post Boost"><b>Post Boost</b><span>750 ◈</span></button>
+    </div>
+    <div class="card note"><h3>How game-linked rewards work</h3><p>The example modifiers you gave (Pistons 76% lower, Bulls 24% higher) are treated as <b>XP reward modifiers for predictions</b>, not betting odds. They can change how much XP a correct prediction earns.</p></div>
+  </section>
+
+  <section id="profile" class="page" hidden>
+    <div class="profile card">
+      <div class="avatar">P</div><div><h2>@playrushzii</h2><p class="muted">Playrush community profile</p></div>
+    </div>
+    <div class="stats-row">
+      <div class="card"><b id="xp">0</b><span>XP</span></div><div class="card"><b>1,250</b><span>Coins</span></div><div class="card"><b>0</b><span>Followers</span></div>
+    </div>
+  </section>
+</main>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<footer>Playrush · Fresh starter · No fabricated sports data</footer>
+<script src="app.js"></script>
+</body>
+</html>
